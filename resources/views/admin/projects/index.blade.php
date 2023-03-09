@@ -1,4 +1,4 @@
-{{-- Index.blade.php --}}
+{{-- * Index.blade.php --}}
 @extends('layouts.admin')
 
 @section('content')
@@ -10,17 +10,17 @@
                         <h2>Lista Progetti</h2>
                     </div>
                 </div>
-                <div>
+                <div class="pull-right">
                     <a class="btn btn-success" href="{{ route('admin.projects.create') }}"> Nuovo progetto</a>
                 </div>
             </div>
+            @if (session('message'))
+                <div class="alert alert-success">
+                    {{ 'message' }}
+                </div>
+            @endif
         </div>
 
-        @if (session('message'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
         <div class="col-12">
             <table class="table table-striped">
                 <tr>
@@ -40,13 +40,13 @@
 
                         <td>
                             {{-- questa rotta visualizza il dettaglio del progetto --}}
-                            <a href="{{ route('admin.projects.show', $project->slug) }}"
-                                class="btn btn-primary btn-square"
+                            <a href="{{ route('admin.projects.show', $project->slug) }}" class="btn btn-primary btn-square"
                                 title="Visualizza Dettaglio"><i class="fas fa-eye"></i></a>
+
                             {{-- questa rotta modifica il progetto --}}
                             <a class="btn btn-warning btn-square" href="{{ route('admin.projects.edit', $project->slug) }}"
                                 title="Modifica Dettaglio"><i class="fas fa-edit"></i></a>
-
+                            {{-- questa rotta elimina il progetto --}}
                             <form action="{{ route('admin.projects.destroy', $project->slug) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

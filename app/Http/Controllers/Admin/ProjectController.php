@@ -112,11 +112,11 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $form_data = $request->validated();
-        $slug = Project::generateSlug($request->title);
+        $slug = Project::generateSlug($request->title, '-');
         $form_data['slug'] = $slug;
 
        $project->update($form_data);
-        return redirect()->route('admin.projects.index')->with('message','post modificato correttamente');
+        return redirect()->route('admin.projects.index')->with('message', $project->title. 'Progetto Modificato Correttamente');
     }
 
     //! -DESTROY-

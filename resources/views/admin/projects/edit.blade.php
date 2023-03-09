@@ -1,3 +1,4 @@
+{{--* Edit.blade.php --}}
 @extends('layouts.admin')
 @section('content')
 
@@ -5,27 +6,59 @@
         <div class="row">
             <div class="col-12 d-flex justify-content-between my-2">
                 <div>
-                    <h2>Dettaglio: {{ $project->title }}</h2>
+                    <h1>Modifica {{ $project->title }}</h1>
                 </div>
+
+                @if (session('message'))
+                    <div class="alert alert-success">
+                        {{ session('message') }}
+                    </div>
+                @endif
+
                 <div>
-                    <a href="{{ route('admin.projects.index') }}" class="btn btn-primary">Torna all'Elenco</a>
+                    <a href="{{ route('admin.projects.index') }}" class="btn btn-primary my-2">Torna all'Elenco</a>
                 </div>
             </div>
 
             <div class="col-12">
-                <strong>Progetto</strong>
-                <p>{{ $project->id }}</p>
 
-                <strong>Titolo</strong>
-                <p>{{ $project->title }}</p>
+                <form action="{{ route('admin.projects.update', $project->slug) }} " method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-                <strong>Descrizione</strong>
-                <p>{{ $project->description }}</p>
+                    {{-- * TITOLO --}}
+                    <div class="form-group my-3">
+                        <label class="control-label">
+                            Titolo
+                        </label>
+                        <input type="text" class="form-control" placeholder="Inserisci Titolo Progetto" id="title"
+                            name="title" value="{{ old('title') ?? $project->title }}">
+                        @error('title')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    {{-- * DESCRIZIONE --}}
+                    <div class="form-group my-3">
+                        <label class="control-label">
+                            Descrizione
+                        </label>
+                        <textarea type="text" class="form-control" placeholder="Inserisci Descrizione del Progetto" id="description"
+                            name="description" value="{{ old('description') ?? $project->description }}"></textarea>
+                    </div>
 
-                <div class="my-3">
-                    <strong>Pubblicato</strong>
-                    <p>{{ date('d/m/Y H:i:s', strtotime($project->published)) }}</p>
-                </div>
+                    {{-- * PUBBLICATO --}}
+                    {{-- <div class="form-group my-3">
+                        <label class="control-label">
+                            Pubblicato
+                        </label>
+                        <input type="date" class="form-control" placeholder="Inserisci l'Immagine"
+                            id="published" name="published" value="{{ old('published') ?? $project->published }}">
+                    </div> --}}
+                    <div class="form-group my-3">
+                        <button type="submit" class="btn btn-success">SALVA</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

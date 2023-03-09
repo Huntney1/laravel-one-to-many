@@ -1,3 +1,4 @@
+{{--* Create.blade.php --}}
 @extends('layouts.admin')
 @section('content')
 
@@ -25,7 +26,7 @@
                             Titolo
                         </label>
                         @error('title')
-                        <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <input type="text" class="form-control" placeholder="Inserisci Titolo Progetto" id="title"
                             name="title">
@@ -36,14 +37,14 @@
                             Descrizione
                         </label>
                         @error('description')
-                        <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                         <textarea type="text" class="form-control" placeholder="Inserisci Descrizione del Progetto" id="description"
                             name="description"></textarea>
                     </div>
 
                     {{-- * PUBBLICATO --}}
-                    {{-- ! non utilizzato perchè non va modificata la data di creazione --}}
+                    {{-- ! Utilizzare solo se si vuole inserire la data di creazione --}}
                     <div class="form-group my-3">
                         <label class="control-label">
                             Pubblicato
