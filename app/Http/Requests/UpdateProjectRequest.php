@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule; //! Inserire Questa Classe
 
 class UpdateProjectRequest extends FormRequest
 {
@@ -25,11 +26,12 @@ class UpdateProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'unique:projects,title', 'max:40'], // campo obbligatorio con una lunghezza massima di 255 caratteri
+            //? la Classe [Rule] da la possibilita di modificare il progetto anche se esiste.
+            'title' => ['required', Rule::unique('projects')->ignore($this->project), 'max:40'], // campo obbligatorio con una lunghezza massima di 255 caratteri
             'description' => ['nullable'], //* campo facoltativo di tipo stringa
             'category' => ['nullable'], // campo facoltativo di tipo stringa
             /* 'image' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048', 'dimensions:min_width=100,min_height=100,max_width=5000,max_height=5000'], */ //*  campo facoltativo di tipo immagine con i formati consentiti JPEG, PNG, JPG, GIF e SVG e dimensione massima di 2 MB
-            /* 'published' => ['sometimes,date,filled'], */ //* campo facoltativo che deve essere una data valida
+             'published' => ['filled'], //* campo facoltativo che deve essere una data valida
         ];
     }
 

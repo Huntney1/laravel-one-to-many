@@ -116,7 +116,7 @@ class ProjectController extends Controller
         $form_data['slug'] = $slug;
 
        $project->update($form_data);
-        return redirect()->route('admin.projects.index')->with('message', $project->title. 'Progetto Modificato Correttamente');
+        return redirect()->route('admin.projects.index')->with('message','Progetto Modificato Correttamente');
     }
 
     //! -DESTROY-
