@@ -53,12 +53,12 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $form_data = $request->validated();
+
         $slug = Project::generateSlug($request->title);
-
-        //*Aggiungo Coppia Chiave Valore All'array $form_data
-        $form_data['slug'] = $slug;
-
-        $newProject = new Project;
+        $excerpt = '';
+        if ($request->content != '') {
+            $excerpt = substr($request->content, 0, 147) . '...';
+        }
 
         //* Converti la data nel formato desiderato
         if (!empty($form_data['published'])) {
@@ -66,12 +66,17 @@ class ProjectController extends Controller
             $form_data['published'] = $date->format('d-m-Y');
             unset($form_data['published']);
 
+            //*Aggiungo Coppia Chiave Valore All'array $form_data
+            $form_data['slug'] = $slug;
+            $form_data['excerpt'] = $excerpt;
+
+
+            $newProject = new Project;
             $newProject->fill($form_data);
             $newProject->save();
 
             return redirect()->route('admin.projects.index')->with('message', 'Progetto Creato con successo.');
         }
-
     }
 
     //! -SHOW-
@@ -112,11 +117,32 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $form_data = $request->validated();
-        $slug = Project::generateSlug($request->title, '-');
-        $form_data['slug'] = $slug;
 
-       $project->update($form_data);
-        return redirect()->route('admin.projects.index')->with('message','Progetto Modificato Correttamente');
+        $slug = Project::generateSlug($request->title, '-');
+
+        $excerpt = '';
+        if ($request->content != '') {
+            $excerpt = substr($request->content, 0, 147) . '...';
+        }
+
+        //*Aggiungo Coppia Chiave Valore All'array $form_data
+        $form_data['slug'] = $slug;
+        $form_data['excerpt'] = $excerpt;
+
+
+        //* Converti la data nel formato desiderato
+        if (!empty($form_data['published'])) {
+            $date = new DateTime($form_data['published']);
+            $form_data['published'] = $date->format('d-m-Y');
+            unset($form_data['published']);
+        }
+
+        $project->update($form_data);
+
+        /*  $newProject = new Project;
+            $newProject->fill($form_data);
+            $newProject->save(); */
+        return redirect()->route('admin.projects.index')->with('message', $project->title . 'Progetto Modificato Correttamente');
     }
 
     //! -DESTROY-

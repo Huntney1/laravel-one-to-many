@@ -15,6 +15,9 @@ class Project extends Model
         'description',
         'slug',
         'published',
+        'excerpt',
+        'author',
+
     ];
 
     use HasFactory;

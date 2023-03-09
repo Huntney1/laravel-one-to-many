@@ -1,4 +1,4 @@
-{{--* Create.blade.php --}}
+{{-- * Create.blade.php --}}
 @extends('layouts.admin')
 @section('content')
 
@@ -31,6 +31,19 @@
                         <input type="text" class="form-control" placeholder="Inserisci Titolo Progetto" id="title"
                             name="title">
                     </div>
+
+                    {{-- * AUTORE --}}
+                    <div class="form-group my-3">
+                        <label class="control-label">
+                            Autore
+                        </label>
+                        <input type="text" class="form-control" placeholder="Inserisci Autore" id="author"
+                            name="author">
+                        @error('author')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     {{-- * DESCRIZIONE --}}
                     <div class="form-group my-3">
                         <label class="control-label">

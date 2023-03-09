@@ -13,7 +13,7 @@
             </div>
 
             <div class="col-12">
-                <strong>Progetto</strong>
+                <strong>Progetto(Id)</strong>
                 <p>{{ $project->id }}</p>
 
                 <strong>Titolo</strong>
@@ -22,10 +22,20 @@
                 <strong>Descrizione</strong>
                 <p>{{ $project->description }}</p>
 
+                <p><strong>Slug:</strong>{{ $project->slug }}</p>
+
+                <p><strong>Autore:</strong>{{ $project->author }}</p>
+
+                <p><strong>Riassunto:</strong>{{ $project->excerpt }}</p>
+
+
+
+
                 <div class="my-3">
                     <strong>Pubblicato</strong>
                     <p>{{ date('d/m/Y H:i:s', strtotime($project->published)) }}</p>
                 </div>
+
             </div>
         </div>
     </div>
