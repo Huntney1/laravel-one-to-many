@@ -62,7 +62,7 @@
                     </tr>
                     <tr>
                         @empty
-                        <td>
+                        <td scope="row">
                             Non ci Sono Projetto, Aggiungine uno da <a href="{{route('admin.projects.create')}}">=>QUI<=</a>
                         </td>
                     </tr>
