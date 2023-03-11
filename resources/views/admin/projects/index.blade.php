@@ -27,16 +27,18 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Titolo</th>
-                    <th scope="col">Descrizione</th>
                     <th scope="col">Slug</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Descrizione</th>
                     <th scope="col">Pubblicato</th>
                 </tr>
                 @forelse ($projects as $project)
                     <tr>
                         <td>{{ $project->id }}</td>
                         <td>{{ $project->title }}</td>
-                        <td>{{ $project->description }}</td>
                         <td>{{ $project->slug }}</td>
+                        <td>{{ $project->category_id }}</td>
+                        <td>{{ $project->description }}</td>
                         <td>{{ date('d/m/Y H:i', strtotime($project->published)) }}</td>
 
                         <td>

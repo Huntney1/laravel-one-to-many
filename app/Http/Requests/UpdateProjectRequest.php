@@ -30,9 +30,9 @@ class UpdateProjectRequest extends FormRequest
             'title' => ['required', Rule::unique('projects')->ignore($this->project), 'max:40'], // campo obbligatorio con una lunghezza massima di 255 caratteri
             'description' => ['nullable'], //* campo facoltativo di tipo stringa
             'autor' => ['nullable'],
-            /* 'category' => ['nullable'], // campo facoltativo di tipo stringa */
+            'category' => ['nullable','exists:categories,id'], // campo facoltativo di tipo stringa
             /* 'image' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048', 'dimensions:min_width=100,min_height=100,max_width=5000,max_height=5000'], */ //*  campo facoltativo di tipo immagine con i formati consentiti JPEG, PNG, JPG, GIF e SVG e dimensione massima di 2 MB
-            'published' => ['filled'], //* campo facoltativo che deve essere una data valida
+            'published_at' => ['nullable', 'date_format:d-m-Y H:i:s'], //* campo facoltativo che deve essere una data valida
         ];
     }
 

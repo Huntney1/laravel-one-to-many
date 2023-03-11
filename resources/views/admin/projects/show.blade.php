@@ -19,10 +19,13 @@
                 <strong>Titolo</strong>
                 <p>{{ $project->title }}</p>
 
+                <p><strong>Slug:</strong>{{ $project->slug }}</p>
+
+                <p><strong>Categoria:</strong>{{ $project->category }}</p>
+
                 <strong>Descrizione</strong>
                 <p>{{ $project->description }}</p>
 
-                <p><strong>Slug:</strong>{{ $project->slug }}</p>
 
                 <p><strong>Autore:</strong>{{ $project->author }}</p>
 
@@ -33,7 +36,7 @@
 
                 <div class="my-3">
                     <strong>Pubblicato</strong>
-                    <p>{{ date('d/m/Y H:i:s', strtotime($project->published)) }}</p>
+                    <p>{{ date('d/m/Y H:i:s', strtotime($project->published_at)) }}</p>
                 </div>
 
             </div>

@@ -30,7 +30,7 @@ class StoreProjectRequest extends FormRequest
             'description'   => ['nullable'], //* campo facoltativo di tipo stringa
             'author'        => ['nullable'],
             'category_id'   => ['nullable', 'exists:categories,id'], // campo facoltativo di tipo stringa */
-            'published'     => ['filled'], //* campo facoltativo che deve essere una data valida
+            'published_at'  => ['nullable', 'date_format:d-m-Y H:i:s'], //* campo facoltativo che deve essere una data valida
             /* 'image'      => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048', 'dimensions:min_width=100,min_height=100,max_width=5000,max_height=5000'], */ //*  campo facoltativo di tipo immagine con i formati consentiti JPEG, PNG, JPG, GIF e SVG e dimensione massima di 2 MB
         ];
     }

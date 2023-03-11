@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller; // Classe da non dimenticare
 use App\Models\Project;
 use App\Models\Category;
+use Carbon\Carbon;
 use DateTime;
 
 
@@ -40,6 +41,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        //* Recupero Elenco Categorie
         $categories = Category::all();
         return view('admin.projects.create', compact('categories'));
     }
@@ -64,21 +66,20 @@ class ProjectController extends Controller
 
         //* Converti la data nel formato desiderato
         if (!empty($form_data['published'])) {
-            $date = new DateTime($form_data['published']);
-            $form_data['published'] = $date->format('d-m-Y');
+            $published_at = Carbon::parse($form_data['published']);
+            $form_data['published_at'] = $published_at->toDateTimeString();
             unset($form_data['published']);
-
-            //*Aggiungo Coppia Chiave Valore All'array $form_data
-            $form_data['slug'] = $slug;
-            $form_data['excerpt'] = $excerpt;
-
-
-            $newProject = new Project;
-            $newProject->fill($form_data);
-            $newProject->save();
-
-            return redirect()->route('admin.projects.index')->with('message', 'Progetto Creato con successo.');
         }
+        //*Aggiungo Coppia Chiave Valore All'array $form_data
+        $form_data['slug'] = $slug;
+        $form_data['excerpt'] = $excerpt;
+
+
+        $newProject = new Project;
+        $newProject->fill($form_data);
+        $newProject->save();
+
+        return redirect()->route('admin.projects.index')->with('message', 'Progetto Creato con successo.');
     }
 
     //! -SHOW-
@@ -104,6 +105,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+
+        //* Recupero Elenco Categorie
+        $categories = Category::all();
         return view('admin.projects.edit', compact('project'));
     }
 
