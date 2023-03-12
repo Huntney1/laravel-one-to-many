@@ -25,7 +25,7 @@ class ProjectSeeder extends Seeder
             $newProject->title = $faker->sentence(3);
             $newProject->description = $faker->text();
             $newProject->slug = Str::slug($newProject->title, '-');
-            $newProject->published = $faker->dateTimeThisYear()->format('Y-m-d H:i:s');
+            $newProject->published = $faker->dateTimeThisYear()->format('d-m-Y H:i:s');
 
             $newProject->save();
         }

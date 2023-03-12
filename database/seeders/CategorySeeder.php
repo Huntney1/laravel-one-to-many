@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-use App\Models\Category as ModelsCategory;
+use App\Models\Category as Category;
 
 class CategorySeeder extends Seeder
 {
@@ -28,7 +28,7 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category){
-            $newCategory = new ModelsCategory ();
+            $newCategory = new Category ();
             $newCategory->name = $category;
             $newCategory->slug = Str::slug($newCategory->name, '-');
 

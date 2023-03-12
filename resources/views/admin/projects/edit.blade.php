@@ -50,13 +50,32 @@
                         @enderror
                     </div>
 
+                    {{-- * CATEGORIE --}}
+                    <div class="form-group my-3">
+                        <label class="control-label">
+                            Categorie
+                        </label>
+                        <select class="form-control" name="category_id" id="category_id">
+                            <option value="">Seleziona Categoria...</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{$category->id == old('$category_id', $project->category_id) ? 'selected' : ''}}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     {{-- * DESCRIZIONE --}}
                     <div class="form-group my-3">
                         <label class="control-label">
                             Descrizione
                         </label>
                         <textarea type="text" class="form-control" placeholder="Inserisci Descrizione del Progetto" id="description"
-                            name="description" value="{{ old('description') ?? $project->description }}"></textarea>
+                            name="description" value="{{ old('description') ?? $categories->description }}"></textarea>
                     </div>
 
                     {{-- * PUBBLICATO --}}

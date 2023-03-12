@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Project;
 
 class Category extends Model
 {
@@ -14,6 +13,7 @@ class Category extends Model
 
     public function Projects(){
 
-        return $this->hasMany(Project::class);
+        return $this->hasMany(Project::class); //* hasMany : la Categoria può far parte di più Projetti
     }
+
 }

@@ -50,10 +50,14 @@
                             Categorie
                         </label>
                         <select class="form-control" name="category_id" id="category_id">
+                            <option value="">Seleziona Categoria...</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
+                        @error('category_id')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- * DESCRIZIONE --}}

@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use App\Models\Category;
 
 class Project extends Model
 {
@@ -15,9 +14,10 @@ class Project extends Model
         'title',
         'description',
         'slug',
-        'published',
+        'category_id',
         'excerpt',
         'author',
+        'published',
 
     ];
 
@@ -27,6 +27,11 @@ class Project extends Model
         return Str::slug($title, '-');
     }
 
+    /**
+     * Get the category project.
+     ** Ottieni il progetto di categoria.
+     *
+     */
     public function category(){
         return $this->belongsTo(category::class); //* belongsTo = appartiene A...
     }

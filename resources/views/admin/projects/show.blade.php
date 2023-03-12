@@ -21,7 +21,7 @@
 
                 <p><strong>Slug:</strong>{{ $project->slug }}</p>
 
-                <p><strong>Categoria:</strong>{{ $project->category }}</p>
+                <p><strong>Categoria:</strong>{{ $project->category ? $project->category->name : 'Nessuna Categoria Selezionata'}}</p>
 
                 <strong>Descrizione</strong>
                 <p>{{ $project->description }}</p>
